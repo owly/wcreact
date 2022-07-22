@@ -70,13 +70,16 @@
       //   { value: "bassoon", label: " bassoon" }
       // ];
 
+      // var baseUrl = "./toneinst/samples/";
+      var baseUrl = "https://haham.net/wc/toneinst/samples/";
+
 var instArray = ['piano', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'trumpet', 'tuba', 'violin','guitar-electric','laughnotes','harp','harmonium','guitar-acoustic','xylophone','organ','guitar-nylon','french-horn','bass-electric'];
       // var instArray = ["piano", "bass-electric"];
       var toneInstruments = SampleLibrary.load({
         instruments: instArray,
         ext: ".mp3",
         // instruments: ["piano", "cello"],
-        baseUrl: "./toneinst/samples/"
+        baseUrl: baseUrl
       });
       Object.keys(toneInstruments).forEach(instrument => {
         toneInstruments[instrument].toMaster();        
