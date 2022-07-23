@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+    <title>ToneJS-Instruments Demo</title>
+
+</head>
+
+<body>
+    
+    <!-- <script type="text/javascript" src="external-js/nprogress.js"></script>
+    <script type="text/javascript" src="external-js/NexusUI.js"></script> -->
+    <script type="text/javascript" src="external-js/Tone.js"></script>
+    <script type="text/javascript" src="Tonejs-Instruments.js"></script>
+<script src="../Piano Genie_files/jquery-3.2.1.slim.min.js" ></script>
+
+    
+    
+    
+    <script>
+
+// passing an array of instrument names will load all the instruments listed returning a new object, 
+// each property a tone.js object
+var instruments = SampleLibrary.load({
+  instruments: ["piano"],
+    baseUrl: "/p/wc/toneinst/samples/"
+  });
+
+// waits for instrument sound files to load from /samples/
+Tone.Buffer.on('load', function() {
+    console.log("PLAY");
+     // play instrument sound
+     instruments['piano'].toMaster();
+     instruments['piano'].triggerAttack("A4");
+     instruments['piano'].toMaster();
+     instruments['piano'].triggerAttack("A5");
+     instruments['piano'].toMaster();
+     instruments['piano'].triggerAttack("C4");
+     });
+        
+$(document).keydown(function(keyPressed) {
+    l = ['A','B'];
+    i = randInt(3,6);
+    note = 'A' + i.toString();
+   if (keyPressed.keyCode == 16) {
+     instruments['piano'].triggerAttack(note);
+   }
+//   if (keyPressed.keyCode == 17) {
+  //      instruments['piano'].triggerRelease(Tone.Frequency(note, "midi").toNote());
+ //  }
+  });
+        function randInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="N.P. Brosowsky" content="Tone.js instrument library loader" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+    <!-- Styling -->
+    <link rel="stylesheet" href="nprogress.css" type="text/css" />
+    <!-- Document Title
+	============================================= -->
+    <title>ToneJS-Instruments Demo</title>
+
+</head>
+
+<body>
+    <style type="text/css">
+        body {
+            height: 100vh;
+            width: 100vw;
+            font-family: Helvetica, arial;
+            font-size: 16px;
+        }
+
+        #content {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .container {
+            display: none;
+        }
+
+        #Keyboard {
+            margin: 3px!important;
+        }
+
+    </style>
+    <div id="content">
+        <H3 id="loading">Loading...</H3>
+        <div class="container">
+            <h1> Tone.js-Instruments</h1>
+            <p> (all instruments) </p>
+            <div id="Selector"></div>
+            <br/>
+            <div id="Keyboard"></div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="external-js/nprogress.js"></script>
+    <script type="text/javascript" src="external-js/NexusUI.js"></script>
+    <script type="text/javascript" src="external-js/Tone.js"></script>
+    <script type="text/javascript" src="Tonejs-Instruments.js"></script>
+<script src="../Piano Genie_files/jquery-3.2.1.slim.min.js" ></script>
+
+    <script>
+        var samples = SampleLibrary.load({
+            instruments: ['cello'],
+//            instruments: ['cello', 'contrabass', 'flute','violin'],
+            baseUrl: "/p/wc/tonejs-instruments/samples/"
+        })
+            current = samples['cello'];
+
+        Tone.Buffer.on('error', function() {
+            document.querySelector("#loading").innerHTML = "I'm sorry, there has been an error loading the samples. This demo works best on on the most up-to-date version of Chrome.";
+        })
+
+$(document).keydown(function(keyPressed) {
+    note = 'A4';
+   if (keyPressed.keyCode == 16) {
+        current.triggerAttack(Tone.Frequency(note, "midi").toNote());
+   }
+   if (keyPressed.keyCode == 17) {
+        current.triggerRelease(Tone.Frequency(note, "midi").toNote());
+   }
+  });
+        
+
+    </script>
+
+</body>
+
+</html>
