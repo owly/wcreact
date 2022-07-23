@@ -30,7 +30,7 @@ export default function App() {
   const [keyOf, setKeyOf] = useState("C");
   const [scale, setScale] = useState("major");
   const [presetName, setPresetName] = useState();
-  const [lastPlayed, setLastPlayed] = useState({});
+  const [lastPlayed, setLastPlayed] = useState(['','','','']);
 
   const playerRef = useRef(player);
   // var instArray = toneInstruments;
@@ -117,8 +117,10 @@ export default function App() {
     // setLogValue("play " + num + "\n" + logValue);
     console.log("play " + num + "\n" + logValue);
     var note = allInstruments[num].playGenie();
-    lastPlayed[num] = note;
-    setLastPlayed(lastPlayed);
+    var lastPlayedCopy = [...lastPlayed];
+    lastPlayedCopy[num] = note;
+    console.log(lastPlayedCopy);
+    setLastPlayed(lastPlayedCopy);
     // };
   }
 
@@ -295,6 +297,7 @@ export default function App() {
             >
               {allInstruments[1].instrumentName}
             </Button>
+            {lastPlayed[1]}
           </Col>
           <Col xs={6} md={4} lg={3}>
             <Button
@@ -304,6 +307,7 @@ export default function App() {
             >
               {allInstruments[2].instrumentName}
             </Button>
+            {lastPlayed[2]}
           </Col>
           <Col xs={6} md={4} lg={3}>
             <Button
@@ -313,6 +317,7 @@ export default function App() {
             >
               {allInstruments[3].instrumentName}
             </Button>
+            {lastPlayed[3]}
           </Col>
         </Row>
 
